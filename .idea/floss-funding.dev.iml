@@ -137,7 +137,6 @@
     <orderEntry type="library" scope="PROVIDED" name="notiffany (v0.1.3, mise: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="oauth2 (v2.0.14, mise: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth (v2.1.3, mise: 3.4.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="omniauth-github (v2.0.1, mise: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-identity (v3.1.4, mise: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-oauth2 (v1.8.0, mise: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-rails_csrf_protection (v1.0.2, mise: 3.4.5) [gem]" level="application" />

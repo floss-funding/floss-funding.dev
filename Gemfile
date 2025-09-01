@@ -104,7 +104,6 @@ gem "omniauth", "~> 2.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 # Provider strategies
 gem "omniauth-identity", "~> 3.0"
-gem "omniauth-github", "~> 2.0"
 # Base OAuth2 strategy (used for custom Codeberg strategy)
 gem "omniauth-oauth2", "~> 1.8"
 # Password hashing for Identity

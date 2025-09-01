@@ -4,6 +4,7 @@ OmniAuth.config.logger = Rails.logger
 OmniAuth.config.allowed_request_methods = [:post]
 
 # Load custom strategies
+require "omniauth/strategies/github"
 require "omniauth/strategies/codeberg"
 require "omniauth/strategies/gitlab"
 
