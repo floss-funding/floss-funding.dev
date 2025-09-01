@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   # Favicon: redirect legacy /favicon.ico requests to our SVG logo
-  get "/favicon.ico", to: redirect("/logo-blank.svg")
+  get "/favicon.ico", to: redirect("/logo-blank.svg", status: 302)
 
   # Auth
   resource :session, only: [:new, :create, :destroy]

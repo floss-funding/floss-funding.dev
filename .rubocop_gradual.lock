@@ -51,9 +51,9 @@
   "config/environments/production.rb:4013298551": [
     [38, 55, 6, "Style/GlobalStdStream: Use `$stdout` instead of `STDOUT`. (https://shopify.github.io/ruby-style-guide/#global-stdout)", 3356722952]
   ],
-  "config/routes.rb:4037197253": [
-    [18, 3, 87, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 647732148],
-    [19, 3, 81, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 3367398321]
+  "config/routes.rb:4275515847": [
+    [21, 3, 87, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 647732148],
+    [22, 3, 81, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 3367398321]
   ],
   "lib/tasks/litestream.rake:1706274165": [
     [3, 21, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544],
