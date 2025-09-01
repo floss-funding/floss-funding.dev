@@ -72,6 +72,16 @@ bin/rake tailwindcss:build
 bundle exec(rspec)
 ```
 
+## OAuth setup (GitHub)
+When creating a GitHub OAuth App for this project, use the following Authorization callback URL based on environment:
+
+- QA (fly.io): https://floss-funding-qa.fly.dev/auth/github/callback
+
+Notes:
+- The OmniAuth callback route is defined as `/auth/:provider/callback` (see config/routes.rb). For GitHub specifically, that is `/auth/github/callback`.
+- Ensure you set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in your environment. For local development, see `.env.local.example` and `.envrc`.
+- For QA deploys (Fly.io via GitHub Actions), add repository secrets named `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`. The workflow `.github/workflows/fly-deploy.yml` will sync them into Fly Secrets for the `floss-funding-qa` app on the next deploy.
+
 ## Notes
 - Tailwind is integrated via the `tailwindcss-rails` gem.
 - You can use either Option A (continuous watcher) or Option B (Guard-triggered builds). Use the one that best fits your workflow.

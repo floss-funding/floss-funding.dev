@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Set Fly.io secrets (SMTP + QA email sanitization)
+      - name: Set Fly.io secrets (SMTP + QA email sanitization + OAuth)
         run: |
           # Set or update secrets on the Fly app. These persist between deploys.
           flyctl secrets set \
@@ -25,11 +25,15 @@ jobs:
             ENABLE_SANITIZE_EMAIL="true" \
             SANITIZE_TO="qa-mails@galtzo.com" \
             SMTP_PASSWORD="${SMTP_PASSWORD}" \
-            SENTRY_DSN="${SENTRY_DSN}"
+            SENTRY_DSN="${SENTRY_DSN}" \
+            GITHUB_CLIENT_ID="${GITHUB_CLIENT_ID}" \
+            GITHUB_CLIENT_SECRET="${GITHUB_CLIENT_SECRET}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
       - name: Deploy to Fly.io
         run: flyctl deploy --remote-only
         env:
