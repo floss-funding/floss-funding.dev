@@ -1,5 +1,5 @@
 {
-  "Guardfile:1017828377": [
+  "Guardfile:332206708": [
     [13, 9, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544],
     [15, 40, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544]
   ],
