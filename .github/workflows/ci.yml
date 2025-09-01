@@ -1,9 +1,24 @@
 name: CI
 
+# Permissions for coverage
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
 on:
   pull_request:
   push:
     branches: [ main ]
+
+env:
+  K_SOUP_COV_MIN_BRANCH: 40
+  K_SOUP_COV_MIN_LINE: 70
+  K_SOUP_COV_MIN_HARD: true
+  K_SOUP_COV_FORMATTERS: "xml,rcov,lcov,tty"
+  K_SOUP_COV_DO: true
+  K_SOUP_COV_MULTI_FORMATTERS: true
+  K_SOUP_COV_COMMAND_NAME: "Test Coverage"
 
 jobs:
   scan_ruby:
