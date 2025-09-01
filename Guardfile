@@ -27,6 +27,8 @@ end
 guard :rake, task: "tailwindcss:build" do
   # Stylesheets (including tailwind entry file)
   watch(%r{^app/assets/stylesheets/.+\.(css|scss|sass)$})
+  # Tailwind v4 canonical entry directory
+  watch(%r{^app/assets/tailwind/.+\.(css)$})
 
   # JavaScript/TypeScript (class names may affect Tailwind purge)
   watch(%r{^app/javascript/.+\.(js|mjs|ts|tsx)$})
