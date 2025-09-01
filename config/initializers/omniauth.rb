@@ -7,6 +7,17 @@ OmniAuth.config.allowed_request_methods = [:post]
 require "omniauth/strategies/codeberg"
 require "omniauth/strategies/gitlab"
 
+# Determine which providers are configured at boot and expose via Rails.configuration.x
+github_enabled = ENV["GITHUB_CLIENT_ID"].present? && ENV["GITHUB_CLIENT_SECRET"].present?
+gitlab_enabled = ENV["GITLAB_CLIENT_ID"].present? && ENV["GITLAB_CLIENT_SECRET"].present?
+codeberg_enabled = ENV["CODEBERG_CLIENT_ID"].present? && ENV["CODEBERG_CLIENT_SECRET"].present?
+
+Rails.configuration.x.oauth_providers = {
+  "github" => github_enabled,
+  "gitlab" => gitlab_enabled,
+  "codeberg" => codeberg_enabled,
+}
+
 Rails.application.config.middleware.use(OmniAuth::Builder) do
   # Password identity
   provider :identity,
@@ -17,7 +28,7 @@ Rails.application.config.middleware.use(OmniAuth::Builder) do
     }
 
   # GitHub OAuth
-  if ENV["GITHUB_CLIENT_ID"].present? && ENV["GITHUB_CLIENT_SECRET"].present?
+  if github_enabled
     provider :github,
       ENV["GITHUB_CLIENT_ID"],
       ENV["GITHUB_CLIENT_SECRET"],
@@ -26,7 +37,7 @@ Rails.application.config.middleware.use(OmniAuth::Builder) do
   end
 
   # GitLab OAuth
-  if ENV["GITLAB_CLIENT_ID"].present? && ENV["GITLAB_CLIENT_SECRET"].present?
+  if gitlab_enabled
     gitlab_site = ENV["GITLAB_SITE"].presence || "https://gitlab.com"
     provider :gitlab,
       ENV["GITLAB_CLIENT_ID"],
@@ -37,7 +48,7 @@ Rails.application.config.middleware.use(OmniAuth::Builder) do
   end
 
   # Codeberg OAuth (custom strategy)
-  if ENV["CODEBERG_CLIENT_ID"].present? && ENV["CODEBERG_CLIENT_SECRET"].present?
+  if codeberg_enabled
     provider :codeberg,
       ENV["CODEBERG_CLIENT_ID"],
       ENV["CODEBERG_CLIENT_SECRET"],

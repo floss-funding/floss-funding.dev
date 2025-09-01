@@ -34,10 +34,10 @@
   "app/controllers/projects_controller.rb:3678591547": [
     [7, 16, 25, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 2839845431]
   ],
-  "app/controllers/sessions_controller.rb:1052759721": [
-    [9, 16, 39, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 466184135],
-    [12, 7, 67, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 2087153367],
-    [51, 5, 44, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 1197536222]
+  "app/controllers/sessions_controller.rb:2885492309": [
+    [26, 16, 39, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 466184135],
+    [29, 7, 67, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 2087153367],
+    [68, 5, 44, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 1197536222]
   ],
   "app/mailers/application_mailer.rb:1362224": [
     [2, 17, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544]
@@ -51,9 +51,9 @@
   "config/environments/production.rb:4013298551": [
     [38, 55, 6, "Style/GlobalStdStream: Use `$stdout` instead of `STDOUT`. (https://shopify.github.io/ruby-style-guide/#global-stdout)", 3356722952]
   ],
-  "config/routes.rb:4275515847": [
-    [21, 3, 87, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 647732148],
-    [22, 3, 81, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 3367398321]
+  "config/routes.rb:1814464409": [
+    [26, 3, 87, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 647732148],
+    [27, 3, 81, "Betterment/NonStandardActions: Route goes to a non-standard controller action. Use a new controller instead of custom actions. (https://github.com/Betterment/betterlint#bettermentnonstandardactions)", 3367398321]
   ],
   "lib/tasks/litestream.rake:1706274165": [
     [3, 21, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544],

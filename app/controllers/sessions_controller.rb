@@ -4,6 +4,23 @@ class SessionsController < ApplicationController
   def new
   end
 
+  # Fallback handler for initiating OmniAuth when provider middleware isn't mounted.
+  # Security: does not start OAuth itself; only redirects with a helpful message if misconfigured.
+  def omniauth_start
+    provider = params[:provider].to_s
+
+    providers = Rails.configuration.x.oauth_providers || {}
+    configured = providers[provider]
+
+    unless configured
+      redirect_to(new_session_path(alert: "#{provider.titleize} sign-in is not configured. Please try again later.")) and return
+    end
+
+    # If configured, this action shouldn't normally run because OmniAuth middleware handles it earlier.
+    # But as a safe fallback, guide the user.
+    redirect_to(new_session_path(alert: "Please use the Sign in with #{provider.titleize} button to start authentication."))
+  end
+
   # Password sign-in (Identity)
   def create
     identity = Identity.find_by(email: params[:email])

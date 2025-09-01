@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   match "/auth/:provider/callback", to: "sessions#omniauth", via: [:get, :post] # rubocop:disable Betterment/NonStandardActions
   match "/auth/failure", to: "sessions#failure", via: [:get, :post] # rubocop:disable Betterment/NonStandardActions
 
+  # Fallback initiation handlers (only used when provider middleware is not mounted)
+  # POST keeps the secure initiation flow. GET is redirected to login with guidance.
+  post "/auth/:provider", to: "sessions#omniauth_start" # rubocop:disable Betterment/NonStandardActions
+  get "/auth/:provider", to: redirect(status: 302) { |params, _req| "/session/new?alert=#{CGI.escape("Please use the Sign in button to start authentication.")}&provider=#{params[:provider]}" } # rubocop:disable Betterment/NonStandardActions
+
   resources :accounts, only: [:new, :create]
 
   # Password resets
