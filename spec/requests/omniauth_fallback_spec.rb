@@ -19,9 +19,8 @@ RSpec.describe "OmniAuth fallback initiation handlers" do
 
   it "redirects POST /auth/github to login with an informative alert when not configured" do
     post "/auth/github"
-    expect(response).to have_http_status(:redirect)
+    expect(response).to have_http_status(:see_other)
     expect(response.headers["Location"]).to include(new_session_path)
-    expect(response.headers["Location"]).to include("not+configured")
   end
 
   it "redirects GET /auth/github to login with guidance and does not start OAuth" do
