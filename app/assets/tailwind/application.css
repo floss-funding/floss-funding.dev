@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+/* Tailwind v4 CSS-based theme configuration */
+@theme {
+  /* Colors */
+  --color-christi: #64b40c;
+  --color-limeade: #468204;
+  --color-van-cleef: #420d0e;
+  --color-black: #040404;
+  --color-bright-green: #71d604;
+  --color-tamarillo: #a51611;
+  --color-new-york-pink: #d98186;
 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+  /* Fonts */
+  --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-*/
+/* Optional: Load official plugins (Tailwind v4) */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/container-queries";
 
 /* Slot machine spin-in animation */
 @layer utilities {
