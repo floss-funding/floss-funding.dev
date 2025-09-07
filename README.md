@@ -14,9 +14,20 @@ bin/rails db:setup
 ```
 
 ## Running the app
-Start the Rails server:
+Recommended: run the dev Procfile (starts Rails + Tailwind watcher):
 ```
+bin/dev
+```
+If you prefer to run Rails directly, you must also run the Tailwind watcher in another terminal, otherwise CSS may look broken locally:
+```
+# Terminal 1
 bin/rails server
+# Terminal 2
+bin/rails tailwindcss:watch
+```
+You can also do a one-off Tailwind build at any time:
+```
+bin/rake tailwindcss:build
 ```
 
 ## Auto-building TailwindCSS during development
@@ -45,7 +56,7 @@ bundle install
 ```
 2) Start Guard:
 ```
-bundle exec(guard)
+bundle exec guard
 ```
 Guard will watch:
 - app/assets/stylesheets/**/*
