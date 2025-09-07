@@ -1,37 +1,51 @@
-<h1 class="mt-6">Libraries</h1>
-
-<div class="mt-2 text-sm text-gray-700 flex items-end gap-4">
-  <div>
-    <label for="q" class="block text-xs text-gray-600">Search</label>
-    <%= form_with url: libraries_path, method: :get, data: { controller: "auto-submit", auto_submit_delay_value: 200 }, class: "flex items-center gap-2" do %>
-      <input type="text" name="q" id="q" value="<%= h(@q) %>" placeholder="Search by name" class="mt-1 w-56 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi" />
-      <%# Preserve sort when searching %>
-      <input type="hidden" name="sort" value="<%= h(params[:sort].presence || 'name_asc') %>">
-      <% if @q.present? %>
-        <%= link_to 'Clear', libraries_path(sort: params[:sort].presence), class: 'text-xs text-christi hover:underline ml-2' %>
-      <% end %>
+<div class="max-w-4xl mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold mb-2">Libraries</h1>
+  </div>
+  <div class="mb-4">
+    <%= form_with url: libraries_path, method: :get, data: { controller: "auto-submit", auto_submit_delay_value: 200 }, class: "flex flex-col sm:flex-row gap-3 items-start sm:items-end" do %>
+      <div>
+        <label for="q" class="block text-sm font-medium text-gray-700">Search</label>
+        <input type="text" name="q" id="q" value="<%= h(@q) %>" placeholder="Search libraries by name" class="mt-1 block w-64 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi" />
+      </div>
+      <div>
+        <label for="sort" class="block text-sm font-medium text-gray-700">Sort</label>
+        <select name="sort" id="sort" class="mt-1 block w-56 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi">
+          <option value="new" <%= "selected" if @sort == "new" %>>New to Old</option>
+          <option value="old" <%= "selected" if @sort == "old" %>>Old to New</option>
+          <option value="a_z" <%= "selected" if @sort == "a_z" %>>A–Z (name)</option>
+          <option value="z_a" <%= "selected" if @sort == "z_a" %>>Z–A (name)</option>
+        </select>
+      </div>
+      <fieldset class="w-full">
+        <legend class="block text-sm font-medium text-gray-700">Languages</legend>
+        <div class="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <% @all_ecosystems.each do |eco| %>
+            <label class="inline-flex items-center gap-2 py-1">
+              <input type="checkbox" name="ecosystems[]" value="<%= eco %>" <%= @ecosystems.include?(eco) ? "checked" : nil %> class="rounded border-gray-300 text-christi focus:ring-2 focus:ring-christi" />
+              <span class="text-sm text-gray-800"><%= eco %></span>
+            </label>
+          <% end %>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Select one or more languages.</p>
+      </fieldset>
     <% end %>
   </div>
-  <div>
-    Sort:
-    <%= link_to 'A→Z', libraries_path(q: @q.presence, sort: 'name_asc'), class: 'text-christi hover:underline mr-2' %>
-    <%= link_to 'Z→A', libraries_path(q: @q.presence, sort: 'name_desc'), class: 'text-christi hover:underline' %>
-  </div>
-</div>
 
-<table class="min-w-full divide-y divide-gray-200 mt-4">
-  <thead class="bg-gray-50">
-    <tr>
-      <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-      <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activation Keys</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white divide-y divide-gray-200">
-    <% @libraries.each do |library| %>
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
       <tr>
-        <td class="px-4 py-2 whitespace-nowrap"><%= link_to library.name, library_path(library), class: 'text-christi hover:underline' %></td>
-        <td class="px-4 py-2 whitespace-nowrap"><%= library.activation_keys.size %></td>
+        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+        <th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activation Keys</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <% @libraries.each do |library| %>
+        <tr>
+          <td class="px-4 py-2 whitespace-nowrap"><%= link_to library.name, library_path(library), class: 'text-christi hover:underline' %></td>
+          <td class="px-4 py-2 whitespace-nowrap"><%= library.activation_keys.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
