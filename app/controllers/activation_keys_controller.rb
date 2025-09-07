@@ -3,7 +3,12 @@ class ActivationKeysController < ApplicationController
   before_action :set_activation_key, only: [:show, :edit, :update]
 
   def index
-    @activation_keys = ActivationKey.active.order(created_at: :desc)
+    @sort = params[:sort].presence || "new"
+    @q = params[:q].to_s
+
+    @activation_keys = ActivationKey.active
+      .search(@q)
+      .sort_by_param(@sort)
   end
 
   def show

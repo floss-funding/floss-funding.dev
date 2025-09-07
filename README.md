@@ -16,7 +16,7 @@ bin/rails db:setup
 ## Running the app
 Recommended: run the dev Procfile (starts Rails + Tailwind watcher):
 ```
-bin/dev
+bin / dev
 ```
 If you prefer to run Rails directly, you must also run the Tailwind watcher in another terminal, otherwise CSS may look broken locally:
 ```

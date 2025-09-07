@@ -12,6 +12,35 @@ class ActivationKey < ApplicationRecord
   # Named scope for non-retired records (do not use default scopes)
   scope :active, -> { where(retired: false) }
 
+  # Simple search across common identifying fields
+  scope :search, ->(q) do
+    next all if q.blank?
+    pattern = "%#{q.to_s.strip.downcase}%"
+    where(
+      "LOWER(namespace) LIKE :p OR LOWER(key) LIKE :p OR LOWER(library_name) LIKE :p OR LOWER(project_name) LIKE :p",
+      p: pattern,
+    )
+  end
+
+  # Deterministic sorting based on param
+  class << self
+    def sort_by_param(param)
+      case param.to_s
+      when "old"
+        order(created_at: :asc)
+      when "a_z"
+        order(Arel.sql("LOWER(namespace) ASC, LOWER(key) ASC"))
+      when "z_a"
+        order(Arel.sql("LOWER(namespace) DESC, LOWER(key) DESC"))
+      when "language"
+        order(Arel.sql("LOWER(ecosystem) ASC, LOWER(namespace) ASC, LOWER(key) ASC"))
+      else
+        # default: new to old
+        order(created_at: :desc)
+      end
+    end
+  end
+
   validates :namespace, presence: true
   validates :key, presence: true, uniqueness: {scope: :namespace, case_sensitive: false}
   validates :ecosystem, presence: true
