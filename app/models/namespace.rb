@@ -1,3 +1,12 @@
+# Namespace represents the owner scope or organization part of an activation key, paired with a key
+# to form a unique identifier (namespace/key) within an ecosystem. It typically maps to an
+# organization, account, or publisher in the package registry.
+#
+# Associations:
+# - has_many ActivationKey
+#
+# Behavior:
+# - After creation, attempts to link any existing ActivationKeys that reference this name/ecosystem
 class Namespace < ApplicationRecord
   has_many :activation_keys
 

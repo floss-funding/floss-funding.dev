@@ -93,6 +93,16 @@ Notes:
 - Ensure you set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in your runtime environment. For local development, set these in `.env.local` (see `.env.local.example`) and/or `.envrc`.
 - For QA deploys (Fly.io via GitHub Actions), GitHub forbids repository secret names starting with `GITHUB_`. Create repository secrets named `GH_OAUTH_CLIENT_ID` and `GH_OAUTH_CLIENT_SECRET` instead. The workflow `.github/workflows/fly-deploy.yml` reads those and sets Fly app secrets named `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` accordingly on deploy.
 
+## Domain models
+- ActivationKey: Represents a unique activation key within an ecosystem (namespace/key) targeting a Library; optionally linked to a Project; supports featured and free-for-open-source flags; main entity for recording activations.
+- ActivationEvent: Records the use of an activation key, optionally by an Account; carries donation-related flags and currency; not deletable; increments ActivationKey counter cache.
+- Account: End-user entity identified by email; owns login Identities; may be associated with ActivationEvents.
+- Identity: OmniAuth Identity credential (email/password) tied to an Account; uses email as auth_key.
+- Library: A package artifact within an ecosystem (e.g., gem, npm package); target of ActivationKeys; auto-links existing keys on create.
+- Namespace: Owner/org scope used with key to form namespace/key within an ecosystem; auto-links existing keys on create.
+- Project: Software project (often open source) used for attribution/badging when supporting a Library; auto-links existing keys on create.
+- PasswordResetToken: Single-use, time-bound token for resetting an Identity’s password; provides convenience helpers and scopes.
+
 ## Notes
 - Tailwind is integrated via the `tailwindcss-rails` gem.
 - You can use either Option A (continuous watcher) or Option B (Guard-triggered builds). Use the one that best fits your workflow.

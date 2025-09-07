@@ -40,11 +40,11 @@
   "app/mailers/application_mailer.rb:1362224": [
     [2, 17, 3, "Betterment/EnvironmentConfiguration: Environment variables should be parsed at boot time and assigned to `Rails.configuration` or some other configurable object. (https://github.com/Betterment/betterlint#bettermentenvironmentconfiguration)", 193439544]
   ],
-  "app/models/activation_event.rb:4180402370": [
-    [8, 30, 14, "Rails/RedundantPresenceValidationOnBelongsTo: Remove explicit presence validation for `activation_key`.", 2902869392]
+  "app/models/activation_event.rb:2337072959": [
+    [18, 30, 14, "Rails/RedundantPresenceValidationOnBelongsTo: Remove explicit presence validation for `activation_key`.", 2902869392]
   ],
-  "app/models/password_reset_token.rb:3704136826": [
-    [9, 3, 155, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method. (https://shopify.github.io/ruby-style-guide/#def-self-class-methods)", 4215762685]
+  "app/models/password_reset_token.rb:3547030589": [
+    [19, 3, 155, "Style/ClassMethodsDefinitions: Use `class << self` to define a class method. (https://shopify.github.io/ruby-style-guide/#def-self-class-methods)", 4215762685]
   ],
   "config/environments/production.rb:4013298551": [
     [38, 55, 6, "Style/GlobalStdStream: Use `$stdout` instead of `STDOUT`. (https://shopify.github.io/ruby-style-guide/#global-stdout)", 3356722952]

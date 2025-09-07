@@ -1,3 +1,23 @@
+# ActivationKey represents a unique activation key issued for a specific library (and optionally a project)
+# within a given package ecosystem (e.g., RubyGems, PyPI). It is the central entity recorded when
+# an activation occurs. Keys are namespaced (namespace/key) and can be flagged as featured or
+# free for open source, which enables badge generation linking a project to the library it supports.
+#
+# Associations:
+# - belongs_to Namespace (as namespace_record) and Library; both required
+# - belongs_to Project; optional (primarily used when free_for_open_source is enabled)
+# - has_many ActivationEvent; cannot be destroyed once created
+#
+# Key fields (selected):
+# - namespace, key: textual identity of the activation key (unique per namespace)
+# - ecosystem: enumeration describing the language ecosystem for the key
+# - library_name, project_name, project_url: denormalized strings used to auto-link associations
+# - activation_event_count: counter cache of associated events
+#
+# Behavior highlights:
+# - .search and .sort_by_param support simple searching/sorting in the UI
+# - before_validation hooks ensure associations are created/linked from denormalized names
+# - badge_markdown builds an OSS support badge when appropriate
 class ActivationKey < ApplicationRecord
   has_many :activation_events, dependent: :restrict_with_error
 
