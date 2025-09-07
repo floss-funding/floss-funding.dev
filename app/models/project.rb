@@ -10,6 +10,13 @@
 class Project < ApplicationRecord
   has_many :activation_keys
 
+  # Simple case-insensitive search by name
+  scope :search, ->(q) do
+    next all if q.blank?
+    pattern = "%#{q.to_s.strip.downcase}%"
+    where("LOWER(name) LIKE ?", pattern)
+  end
+
   validates :name, presence: true, length: {minimum: 2, maximum: 100}
   validates :ecosystem, presence: true
   validates :name, uniqueness: {scope: :ecosystem, case_sensitive: false}

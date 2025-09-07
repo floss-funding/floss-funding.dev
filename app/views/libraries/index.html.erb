@@ -1,5 +1,25 @@
 <h1 class="mt-6">Libraries</h1>
 
+<div class="mt-2 text-sm text-gray-700 flex items-end gap-4">
+  <div>
+    <label for="q" class="block text-xs text-gray-600">Search</label>
+    <%= form_with url: libraries_path, method: :get, data: { controller: "auto-submit", auto_submit_delay_value: 200 }, class: "flex items-center gap-2" do %>
+      <input type="text" name="q" id="q" value="<%= h(@q) %>" placeholder="Search by name" class="mt-1 w-56 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi" />
+      <%# Preserve sort when searching %>
+      <input type="hidden" name="sort" value="<%= h(params[:sort].presence || 'name_asc') %>">
+      <button type="submit" class="px-3 py-2 bg-christi text-white rounded-md hover:bg-bright-green text-xs">Search</button>
+      <% if @q.present? %>
+        <%= link_to 'Clear', libraries_path(sort: params[:sort].presence), class: 'text-xs text-christi hover:underline ml-2' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    Sort:
+    <%= link_to 'A→Z', libraries_path(q: @q.presence, sort: 'name_asc'), class: 'text-christi hover:underline mr-2' %>
+    <%= link_to 'Z→A', libraries_path(q: @q.presence, sort: 'name_desc'), class: 'text-christi hover:underline' %>
+  </div>
+</div>
+
 <table class="min-w-full divide-y divide-gray-200 mt-4">
   <thead class="bg-gray-50">
     <tr>

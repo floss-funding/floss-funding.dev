@@ -1,6 +1,12 @@
 class LibrariesController < ApplicationController
   def index
-    @libraries = Library.order(:name).includes(:activation_keys)
+    @q = params[:q].to_s
+    sort = params[:sort].to_s
+    order = case sort
+    when "name_desc" then {name: :desc}
+    else {name: :asc}
+    end
+    @libraries = Library.search(@q).order(order).includes(:activation_keys)
   end
 
   def show

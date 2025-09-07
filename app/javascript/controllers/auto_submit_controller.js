@@ -55,10 +55,41 @@ export default class extends Controller {
     const url = method === 'get' ? `${action}?${params.toString()}` : action
 
     if (method === 'get') {
-      // Use Turbo if available; falls back to location
+      // Preserve focus/caret of the active input across Turbo navigation
+      const active = document.activeElement
+      const isInput = active && active.tagName === 'INPUT' && this.form.contains(active)
+      const restore = isInput ? {
+        id: active.id,
+        name: active.name,
+        // selectionStart/End may be null for some input types
+        start: typeof active.selectionStart === 'number' ? active.selectionStart : null,
+        end: typeof active.selectionEnd === 'number' ? active.selectionEnd : null
+      } : null
+
+      const onRender = () => {
+        if (!restore) return
+        // Try to find by id first, then by name within the (new) form
+        let el = restore.id ? document.getElementById(restore.id) : null
+        if (!el && restore.name) {
+          el = document.querySelector(`form[action='${action}'] input[name='${CSS.escape(restore.name)}']`) || document.querySelector(`input[name='${CSS.escape(restore.name)}']`)
+        }
+        if (el && el.focus) {
+          el.focus({ preventScroll: true })
+          if (typeof el.setSelectionRange === 'function' && restore.start != null && restore.end != null) {
+            const len = el.value ? el.value.length : 0
+            const start = Math.min(restore.start, len)
+            const end = Math.min(restore.end, len)
+            try { el.setSelectionRange(start, end) } catch (_) { /* ignore */ }
+          }
+        }
+      }
+
       if (window.Turbo && Turbo.visit) {
+        // One-time restore after the next render
+        document.addEventListener('turbo:render', onRender, { once: true })
         Turbo.visit(url, { action: 'advance' })
       } else {
+        window.addEventListener('pageshow', onRender, { once: true })
         window.location.assign(url)
       }
     } else {
