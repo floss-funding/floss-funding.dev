@@ -21,7 +21,7 @@ RSpec.describe "ActivationKeys", type: :request do
     expect(ActivationKey.last).to be_featured
   end
 
-  it "filters by search query and sorts by language and name" do
+  it "filters by search query and filters by one or more languages" do
     # Create a few keys across ecosystems
     ActivationKey.create!(library_name: "Alpha", namespace: "aaa", key: "bbb", ecosystem: "ruby")
     ActivationKey.create!(library_name: "Zeta", namespace: "zzz", key: "yyy", ecosystem: "python")
@@ -35,12 +35,19 @@ RSpec.describe "ActivationKeys", type: :request do
     expect(body).to include("bbb/alpha")
     expect(body).not_to include("zzz/yyy")
 
-    # Sort by language (ecosystem asc) should show javascript before ruby
-    get activation_keys_path, params: {sort: "language"}
+    # Filter by a single language (javascript)
+    get activation_keys_path, params: {ecosystems: ["javascript"]}
     body = response.body
-    js_index = body.index("bbb/alpha")
-    rb_index = body.index("aaa/bbb")
-    expect(js_index).to be < rb_index
+    expect(body).to include("bbb/alpha")
+    expect(body).not_to include("aaa/bbb")
+    expect(body).not_to include("zzz/yyy")
+
+    # Filter by multiple languages (javascript and ruby)
+    get activation_keys_path, params: {ecosystems: ["javascript", "ruby"]}
+    body = response.body
+    expect(body).to include("bbb/alpha")
+    expect(body).to include("aaa/bbb")
+    expect(body).not_to include("zzz/yyy")
   end
 
   it "sorts old to new when requested" do

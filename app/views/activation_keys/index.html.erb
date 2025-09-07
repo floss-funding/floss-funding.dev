@@ -4,7 +4,7 @@
     <%= link_to 'New Activation Key', new_activation_key_path, class: 'inline-block px-7 py-3.5 text-base bg-christi text-white rounded-md hover:bg-bright-green' %>
   </div>
   <div class="mb-4">
-    <%= form_with url: activation_keys_path, method: :get, local: true, class: "flex flex-col sm:flex-row gap-3 items-start sm:items-end" do %>
+    <%= form_with url: activation_keys_path, method: :get, data: { controller: "auto-submit", auto_submit_delay_value: 200 }, class: "flex flex-col sm:flex-row gap-3 items-start sm:items-end" do %>
       <div>
         <label for="q" class="block text-sm font-medium text-gray-700">Search</label>
         <input type="text" name="q" id="q" value="<%= h(@q) %>" placeholder="Search namespace, key, library, project" class="mt-1 block w-64 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi" />
@@ -16,12 +16,20 @@
           <option value="old" <%= "selected" if @sort == "old" %>>Old to New</option>
           <option value="a_z" <%= "selected" if @sort == "a_z" %>>A–Z (namespace/key)</option>
           <option value="z_a" <%= "selected" if @sort == "z_a" %>>Z–A (namespace/key)</option>
-          <option value="language" <%= "selected" if @sort == "language" %>>By language</option>
         </select>
       </div>
-      <div>
-        <button type="submit" class="inline-flex items-center px-4 py-2 rounded-md bg-christi text-white hover:bg-bright-green">Apply</button>
-      </div>
+      <fieldset class="w-full">
+        <legend class="block text-sm font-medium text-gray-700">Languages</legend>
+        <div class="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <% @all_ecosystems.each do |eco| %>
+            <label class="inline-flex items-center gap-2 py-1">
+              <input type="checkbox" name="ecosystems[]" value="<%= eco %>" <%= @ecosystems.include?(eco) ? "checked" : nil %> class="rounded border-gray-300 text-christi focus:ring-2 focus:ring-christi" />
+              <span class="text-sm text-gray-800"><%= eco %></span>
+            </label>
+          <% end %>
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Select one or more languages. Your selections are kept as you add more by touch.</p>
+      </fieldset>
     <% end %>
   </div>
   <div class="bg-white shadow overflow-hidden sm:rounded-md">

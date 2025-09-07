@@ -12,10 +12,10 @@
   "app/controllers/accounts_controller.rb:641114525": [
     [14, 7, 73, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 2359104707]
   ],
-  "app/controllers/activation_keys_controller.rb:1488017403": [
-    [25, 7, 67, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 1698494440],
-    [36, 7, 83, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 3069463315],
-    [45, 23, 31, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 2273494657]
+  "app/controllers/activation_keys_controller.rb:550163669": [
+    [28, 7, 67, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 1698494440],
+    [39, 7, 83, "Betterment/RedirectStatus: Did you forget to specify an HTTP status code? The default is `status: :found`, which is usually inappropriate in this situation. Use `status: :see_other` when redirecting a POST, PUT, PATCH, or DELETE request to a GET resource. ", 3069463315],
+    [48, 23, 31, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 2273494657]
   ],
   "app/controllers/libraries_controller.rb:3365430375": [
     [7, 16, 25, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 3044020605]
@@ -34,7 +34,7 @@
   "app/controllers/projects_controller.rb:3678591547": [
     [7, 16, 25, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 2839845431]
   ],
-  "app/controllers/sessions_controller.rb:2826005892": [
+  "app/controllers/sessions_controller.rb:2997024548": [
     [33, 16, 39, "Betterment/UnscopedFind: Records are being retrieved directly using user input.\nPlease query for the associated record in a way that enforces authorization (e.g. \"trust-root chaining\").\n\nINSTEAD OF THIS:\nPost.find(params[:post_id])\n\nDO THIS:\ncurrent_user.posts.find(params[:post_id])\n\nSee here for more information on this error:\nhttps://github.com/Betterment/betterlint/blob/main/README.md#bettermentunscopedfind\n (https://github.com/Betterment/betterlint#bettermentunscopedfind)", 466184135]
   ],
   "app/mailers/application_mailer.rb:1362224": [
@@ -92,7 +92,7 @@
   "spec/requests/activation_keys_show_namespace_spec.rb:504016118": [
     [3, 53, 14, "RSpecRails/InferredSpecType: Remove redundant spec type. (https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/Rails/InferredSpecType)", 3155451116]
   ],
-  "spec/requests/activation_keys_spec.rb:3334392673": [
+  "spec/requests/activation_keys_spec.rb:1112719367": [
     [3, 34, 14, "RSpecRails/InferredSpecType: Remove redundant spec type. (https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/Rails/InferredSpecType)", 3155451116]
   ],
   "spec/requests/activation_keys_update_spec.rb:1505695512": [

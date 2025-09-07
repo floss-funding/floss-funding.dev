@@ -5,10 +5,13 @@ class ActivationKeysController < ApplicationController
   def index
     @sort = params[:sort].presence || "new"
     @q = params[:q].to_s
+    @ecosystems = Array(params[:ecosystems]).compact_blank
 
-    @activation_keys = ActivationKey.active
-      .search(@q)
-      .sort_by_param(@sort)
+    scope = ActivationKey.active.search(@q)
+    scope = scope.where(ecosystem: @ecosystems) if @ecosystems.present?
+    @activation_keys = scope.sort_by_param(@sort)
+
+    @all_ecosystems = Ecosystem.list
   end
 
   def show

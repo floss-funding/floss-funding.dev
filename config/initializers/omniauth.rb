@@ -19,44 +19,48 @@ Rails.configuration.x.oauth_providers = {
   "codeberg" => codeberg_enabled,
 }
 
-Rails.application.config.middleware.use(OmniAuth::Builder) do
-  # Password identity
-  provider :identity,
-    fields: [:email],
-    model: Identity,
-    on_failed_registration: lambda { |env|
-      SessionsController.action(:new).call(env)
-    }
+any_enabled = github_enabled || gitlab_enabled || codeberg_enabled
 
-  # GitHub OAuth
-  if github_enabled
-    provider :github,
-      ENV["GITHUB_CLIENT_ID"],
-      ENV["GITHUB_CLIENT_SECRET"],
-      scope: "user:email",
-      provider_ignores_state: false
-  end
+if any_enabled
+  Rails.application.config.middleware.use(OmniAuth::Builder) do
+    # Password identity (only needed when OmniAuth is mounted for external providers)
+    provider :identity,
+      fields: [:email],
+      model: Identity,
+      on_failed_registration: lambda { |env|
+        SessionsController.action(:new).call(env)
+      }
 
-  # GitLab OAuth
-  if gitlab_enabled
-    gitlab_site = ENV["GITLAB_SITE"].presence || "https://gitlab.com"
-    provider :gitlab,
-      ENV["GITLAB_CLIENT_ID"],
-      ENV["GITLAB_CLIENT_SECRET"],
-      client_options: {site: gitlab_site},
-      scope: "read_user",
-      provider_ignores_state: false
-  end
+    # GitHub OAuth
+    if github_enabled
+      provider :github,
+        ENV["GITHUB_CLIENT_ID"],
+        ENV["GITHUB_CLIENT_SECRET"],
+        scope: "user:email",
+        provider_ignores_state: false
+    end
 
-  # Codeberg OAuth (custom strategy)
-  if codeberg_enabled
-    provider :codeberg,
-      ENV["CODEBERG_CLIENT_ID"],
-      ENV["CODEBERG_CLIENT_SECRET"],
-      scope: "read:user",
-      client_options: {
-        site: ENV["CODEBERG_SITE"].presence || "https://codeberg.org",
-      },
-      provider_ignores_state: false
+    # GitLab OAuth
+    if gitlab_enabled
+      gitlab_site = ENV["GITLAB_SITE"].presence || "https://gitlab.com"
+      provider :gitlab,
+        ENV["GITLAB_CLIENT_ID"],
+        ENV["GITLAB_CLIENT_SECRET"],
+        client_options: {site: gitlab_site},
+        scope: "read_user",
+        provider_ignores_state: false
+    end
+
+    # Codeberg OAuth (custom strategy)
+    if codeberg_enabled
+      provider :codeberg,
+        ENV["CODEBERG_CLIENT_ID"],
+        ENV["CODEBERG_CLIENT_SECRET"],
+        scope: "read:user",
+        client_options: {
+          site: ENV["CODEBERG_SITE"].presence || "https://codeberg.org",
+        },
+        provider_ignores_state: false
+    end
   end
 end

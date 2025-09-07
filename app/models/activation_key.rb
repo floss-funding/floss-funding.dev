@@ -53,7 +53,7 @@ class ActivationKey < ApplicationRecord
       when "z_a"
         order(Arel.sql("LOWER(namespace) DESC, LOWER(key) DESC"))
       when "language"
-        order(Arel.sql("LOWER(ecosystem) ASC, LOWER(namespace) ASC, LOWER(key) ASC"))
+        order(Arel.sql("LOWER(namespace) ASC, LOWER(key) ASC")) # 'language' sort removed; fallback to name-based
       else
         # default: new to old
         order(created_at: :desc)

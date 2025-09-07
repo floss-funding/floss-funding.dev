@@ -20,12 +20,12 @@ class SessionsController < ApplicationController
     configured = providers[provider]
 
     unless configured
-      redirect_to(new_session_path, alert: "#{provider.titleize} sign-in is not configured. Please try again later.", status: :see_other) and return
+      redirect_to(new_session_path, alert: "#{provider.titleize} sign-in is not configured. Please try again later.", status: 303) and return
     end
 
     # If configured, this action shouldn't normally run because OmniAuth middleware handles it earlier.
     # But as a safe fallback, guide the user.
-    redirect_to(new_session_path, alert: "Please use the Sign in with #{provider.titleize} button to start authentication.", status: :see_other)
+    redirect_to(new_session_path, alert: "Please use the Sign in with #{provider.titleize} button to start authentication.", status: 303)
   end
 
   # Password sign-in (Identity)
