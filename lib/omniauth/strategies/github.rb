@@ -32,7 +32,7 @@ module OmniAuth
       end
 
       extra do
-        { raw_info: raw_info }
+        {raw_info: raw_info}
       end
 
       def raw_info
@@ -46,7 +46,7 @@ module OmniAuth
 
       def primary_email_from_api
         emails = oauth_api_get("/user/emails")
-        return nil unless emails.is_a?(Array)
+        return unless emails.is_a?(Array)
         primary = emails.find { |e| e["primary"] } || emails.find { |e| e["verified"] }
         (primary && primary["email"]) || nil
       rescue StandardError

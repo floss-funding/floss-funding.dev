@@ -56,7 +56,7 @@ bundle install
 ```
 2) Start Guard:
 ```
-bundle exec guard
+bundle exec(guard)
 ```
 Guard will watch:
 - app/assets/stylesheets/**/*
@@ -90,8 +90,8 @@ When creating a GitHub OAuth App for this project, use the following Authorizati
 
 Notes:
 - The OmniAuth callback route is defined as `/auth/:provider/callback` (see config/routes.rb). For GitHub specifically, that is `/auth/github/callback`.
-- Ensure you set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in your environment. For local development, see `.env.local.example` and `.envrc`.
-- For QA deploys (Fly.io via GitHub Actions), add repository secrets named `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`. The workflow `.github/workflows/fly-deploy.yml` will sync them into Fly Secrets for the `floss-funding-qa` app on the next deploy.
+- Ensure you set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in your runtime environment. For local development, set these in `.env.local` (see `.env.local.example`) and/or `.envrc`.
+- For QA deploys (Fly.io via GitHub Actions), GitHub forbids repository secret names starting with `GITHUB_`. Create repository secrets named `GH_OAUTH_CLIENT_ID` and `GH_OAUTH_CLIENT_SECRET` instead. The workflow `.github/workflows/fly-deploy.yml` reads those and sets Fly app secrets named `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` accordingly on deploy.
 
 ## Notes
 - Tailwind is integrated via the `tailwindcss-rails` gem.
