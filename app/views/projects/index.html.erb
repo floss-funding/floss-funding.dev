@@ -7,7 +7,6 @@
       <input type="text" name="q" id="q" value="<%= h(@q) %>" placeholder="Search by name" class="mt-1 w-56 rounded-md border-gray-300 shadow-sm focus:border-christi focus:ring-christi" />
       <%# Preserve sort when searching %>
       <input type="hidden" name="sort" value="<%= h(params[:sort].presence || 'name_asc') %>">
-      <button type="submit" class="px-3 py-2 bg-christi text-white rounded-md hover:bg-bright-green text-xs">Search</button>
       <% if @q.present? %>
         <%= link_to 'Clear', projects_path(sort: params[:sort].presence), class: 'text-xs text-christi hover:underline ml-2' %>
       <% end %>
