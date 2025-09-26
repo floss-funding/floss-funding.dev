@@ -92,7 +92,7 @@ gem "litestream", "~> 0.14.0"
 
 gem "redis", "~> 5.4"
 
-gem "aws-sdk-s3", "~> 1.196", require: false
+gem "aws-sdk-s3", "~> 1.199", require: false
 
 gem "flag_shih_tzu", "~> 0.3.23"
 gem "sanitize_email", "~> 2.0", ">= 2.0.10"
